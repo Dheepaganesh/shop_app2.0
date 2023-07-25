@@ -1,5 +1,13 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 .App {
-  text-align: center;
+  width: 100%;
+  height: 800px;
+  font-family: 'Poppins';
+
+}
+#submitbutton{
+  display: none;
 }
 
 .App-logo {
@@ -25,8 +33,122 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: whitesmoke;
 }
+
+/* #head{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  grid-area: nav;
+  background-color: rgb(241, 153, 166);
+
+}
+
+.bars{
+  margin: 25px;
+  text-decoration: none;
+  color: azure;
+}
+
+#sidebar{
+  grid-area: side;
+  background-color: rgba(34, 209, 200,0.1);
+  width: 200px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#sidebar div{
+  margin: 22px;
+
+}
+
+#main{
+  grid-area: main;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  grid-template-areas: 'heading heading'
+                        'image para';
+  background-color: rgba(232, 238, 244,0.16);
+}
+
+
+content{
+  display: flex;
+  flex-direction: column;
+  
+}
+
+#img-content{
+  display: flex;
+  flex-direction: row;
+}
+
+#heading{
+  grid-area: heading;
+}
+
+#image{
+  grid-area: image;
+  animation: App-logo-spin infinite 20s linear;
+  width: 400px;
+  height: 200px;
+  margin: 20px;
+  margin-top: 120px;
+}
+
+#para{
+  grid-area: para;
+  text-align: justify;
+  margin-right: 15px;
+}
+
+#product-page{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  grid-area: ser;
+  background-color: rgba(255, 180, 150,0.25);
+}
+
+.prod{
+  margin: 42px;
+  display: flex;
+  flex-direction: column;
+}
+
+.prod img{
+  width: 180px;
+  height: 180px;
+  margin-bottom: 25px;
+}
+
+#info{
+  display: flex;
+  grid-area: detail;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 600px;
+  background: url('https://media.istockphoto.com/id/918381560/photo/eletronic-department-store-with-bokeh-blurred-background.jpg?s=612x612&w=0&k=20&c=keZzS1F14f1Df9OMMw5Uutw_iqU4BCjLKOTN01f-JpU=');
+  background-size: 100% 600px;
+  color: black;
+}
+
+#foot{
+display: flex;
+flex-direction: row;
+justify-content: center;
+grid-area: foot;
+background-color: rgba(6, 6, 6,0.89);
+color: aliceblue;
+}
+#foot p{
+  margin-left: 0.7%;
+} */
 
 @keyframes App-logo-spin {
   from {
