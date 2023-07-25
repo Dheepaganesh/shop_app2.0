@@ -8,12 +8,13 @@ import HomePage from "./pages/home";
 import AboutPage from "./pages/about";
 import Contact from "./pages/contact";
 import Navbar from "./Navbar";
+import BlogList from "./practice_blogs";
 
 function App(props) {
   return (
     <div className="App">
       <Switch>
-        <Route path="/home" component={HomePage} />
+        <Route path="/home" component={<BlogList />} />
         <Route path="/about" component={FetchCRUD} />
         <Route path="/contact" component={Practice} />
       </Switch>
