@@ -137,11 +137,16 @@ const BlogList = ({ blogs, changeblog, maindata }) => {
     margin: 0 auto;
   `;
 
+  const Search = styled.div`
+    margin: 0 auto;
+    grid-area: head;
+  `;
+
   const condition = nresult === true;
 
   return (
     <Main>
-      <Head>
+      {/* <Head>
         <div className="bar">
           <img
             src="https://p7.hiclipart.com/preview/676/172/890/computer-icons-icon-design-cafe-shopping-store-icon.jpg"
@@ -150,21 +155,22 @@ const BlogList = ({ blogs, changeblog, maindata }) => {
             alt=""
           ></img>
         </div>
-        <div className="bar">
-          <SearchInput
-            type="text"
-            placeholder="Search Products"
-            value={inp}
-            onChange={(e) => getSearch(e.target.value)}
-          ></SearchInput>
-          <SearchButton onClick={SearchData}>Search</SearchButton>
-        </div>
+        
         <BarsMenu className="bar">
           <Link to="/">Home</Link>
           <Link>Shopping</Link>
           <Link>Help</Link>
         </BarsMenu>
-      </Head>
+      </Head> */}
+      <div className="bar" style={{ gridArea: "head", margin: "0 auto" }}>
+        <SearchInput
+          type="text"
+          placeholder="Search Products"
+          value={inp}
+          onChange={(e) => getSearch(e.target.value)}
+        ></SearchInput>
+        <SearchButton onClick={SearchData}>Search</SearchButton>
+      </div>
       <Content>
         {blogs.map((ele, index) => (
           <Card key={index}>

@@ -9,19 +9,23 @@ import AboutPage from "./pages/about";
 import Contact from "./pages/contact";
 import Navbar from "./Navbar";
 import BlogList from "./practice_blogs";
+import Lifecycle from "./lifecycle";
+import Mount from "./mount";
 
 function App(props) {
   return (
     <div className="App">
-      <Switch>
-        <Route path="/home" component={<BlogList />} />
-        <Route path="/about" component={FetchCRUD} />
-        <Route path="/contact" component={Practice} />
-      </Switch>
-      {/* <MyForm />
-      <Practice />
-      <FetchCRUD /> */}
+      {/* <Mount /> */}
+      {/* <Lifecycle /> */}
       <Navbar />
+      <Switch>
+        <Route path="/home" component={HomePage} />
+        <Route path="/shopping" component={Practice} />
+        <Route path="/customers" component={FetchCRUD} />
+      </Switch>
+      {/* <MyForm /> */}
+      {/* <Practice /> */}
+      {/* <FetchCRUD /> */}
     </div>
   );
 }
