@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Rate } from "antd";
-import "antd/dist/antd.css";
+// import { Rate } from "antd";
+// import "antd/dist/antd.css";
 import { useState } from "react";
 import axios from "axios";
 import Shopping from "./pages/shopping";

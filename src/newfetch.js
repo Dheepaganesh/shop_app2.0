@@ -1,6 +1,103 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { styled } from "styled-components";
+import styled from "styled-components";
+
+const Main = styled.div`
+  display: grid;
+  grid-templates-rows: auto auto auto;
+  grid-templates-columns: auto auto auto;
+  grid-templates-areas:
+    "head head head"
+    "shop shop shop"
+    "inp inp inp";
+`;
+
+const FormContainer = styled.div`
+  display: flex;
+  display-area: inp;
+`;
+
+const Content = styled.div`
+  display-area: shop;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const StyledForm = styled.form`
+  width: 50%;
+  display: grid;
+`;
+
+const HTag = styled.h1`
+  display-area: head;
+  text-align: center;
+`;
+
+const StyledCard = styled.div`
+  width: 30%;
+  background-color: rgba(215, 239, 246, 0.25);
+  height: 30%;
+  display: grid;
+  text-align: center;
+  margin: 5px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  border-radius: 7px;
+  text-overlap: ecllipse;
+`;
+const UpdateButton = styled.button`
+  width: 60%;
+  background-color: rgba(0, 245, 255, 0.5);
+  height: 35px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 10px;
+  margin-top: 1%;
+  color: white;
+`;
+
+const Image = styled.img`
+  margin: 0 auto;
+  margin-top: 10px;
+`;
+
+const Submit = styled.button`
+  width: 40%;
+  margin: "0 auto";
+  margin-top: "10px";
+`;
+
+const DeleteButton = styled.button`
+  width: 60%;
+  height: 35px;
+  background-color: rgb(255, 106, 106);
+  margin: 0 auto;
+  border: none;
+  border-radius: 10px;
+  margin-top: 3%;
+  margin-bottom: 3%;
+`;
+
+const SpanC = styled.span`
+  color: lightgreen;
+`;
+
+const InputStyle = styled.input`
+  border: none;
+  width: 30%;
+`;
+
+const StyledInput = styled.input`
+  padding: 8px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  width: 30%;
+  height: 25px;
+  border: none;
+  outline-color: rgb(87, 191, 137);
+`;
 
 const FetchCRUD = () => {
   const [maindb, Setmaindb] = useState([]);
@@ -24,6 +121,10 @@ const FetchCRUD = () => {
       setdata(maindb);
     }
   };
+
+  // const NameInput = () => (
+
+  // );
 
   const DeleteVal = (ind) => {
     const val = data[ind]?.id;
@@ -103,16 +204,6 @@ const FetchCRUD = () => {
   //   margin-top: 2%;
   // `;
 
-  const Main = styled.div`
-    display: grid;
-    grid-templates-rows: auto auto auto;
-    grid-templates-columns: auto auto auto;
-    grid-templates-areas:
-      "head head head"
-      "shop shop shop"
-      "inp inp inp";
-  `;
-
   // const Head = styled.div`
   //   display: flex;
   //   flex-direction: row;
@@ -124,57 +215,8 @@ const FetchCRUD = () => {
   //   margin: 12px;
   // `;
 
-  const Content = styled.div`
-    display-area: shop;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  `;
-
-  const HTag = styled.h1`
-    display-area: head;
-    text-align: center;
-  `;
-
-  const StyledCard = styled.div`
-    width: 30%;
-    background-color: rgba(215, 239, 246, 0.25);
-    height: 30%;
-    display: grid;
-    text-align: center;
-    margin: 5px;
-    margin-left: 20px;
-    margin-bottom: 20px;
-    border-radius: 7px;
-    text-overlap: ecllipse;
-  `;
-  const UpdateButton = styled.button`
-    width: 60%;
-    background-color: rgba(0, 245, 255, 0.5);
-    height: 35px;
-    margin: 0 auto;
-    border: none;
-    border-radius: 10px;
-    margin-top: 1%;
-    color: white;
-  `;
-
-  const DeleteButton = styled.button`
-    width: 60%;
-    height: 35px;
-    background-color: rgb(255, 106, 106);
-    margin: 0 auto;
-    border: none;
-    border-radius: 10px;
-    margin-top: 3%;
-    margin-bottom: 3%;
-  `;
-
-  const SpanC = styled.span`
-    color: lightgreen;
-  `;
-
-  const PostElement = () => {
+  const PostElement = (e) => {
+    e.preventDefault();
     var lastElement = data[data.length - 1];
     var newIds = lastElement?.id + 1;
     console.log(newIds);
@@ -236,13 +278,12 @@ const FetchCRUD = () => {
           {data.map((ele, index) => {
             return (
               <StyledCard key={index}>
-                <img
+                <Image
                   src="https://cdn-icons-png.flaticon.com/512/2593/2593468.png"
                   width={120}
                   height={120}
                   alt="img"
-                  style={{ margin: "0 auto", marginTop: "10px" }}
-                ></img>
+                ></Image>
                 <h5>
                   Name: <SpanC>{ele?.name}</SpanC>
                 </h5>
@@ -259,21 +300,36 @@ const FetchCRUD = () => {
             );
           })}
         </Content>
-        <div style={{ display: "flex", displayArea: "inp" }}>
-          <input
+        <FormContainer>
+          {/* <StyledInput
             type="text"
+            name="Name"
             value={inp}
-            placeholder="Enter Name"
-            onChange={(e) => PostValue(e.target.value)}
-          ></input>
-          <input
-            type="mail"
-            value={mail}
-            placeholder="Enter Mail"
-            onChange={(e) => PostValue1(e.target.value)}
-          ></input>
-          <button onClick={PostElement}>Post</button>
-        </div>
+            onChange={(e) => {
+              PostValue(e.target.value);
+            }}
+            placeholder="First Name"
+            required
+          /> */}
+          <StyledForm onSubmit={(e) => PostElement(e)}>
+            <InputStyle
+              type="text"
+              value={inp}
+              placeholder="Enter Name"
+              minLength={4}
+              pattern="[A-Za-z]+"
+              maxLength={15}
+              onChange={(e) => PostValue(e.target.value)}
+            ></InputStyle>
+            <InputStyle
+              type="email"
+              value={mail}
+              placeholder="Enter Mail"
+              onChange={(e) => PostValue1(e.target.value)}
+            ></InputStyle>
+            <Submit type="submit">Post</Submit>
+          </StyledForm>
+        </FormContainer>
       </Main>
     </div>
   );
