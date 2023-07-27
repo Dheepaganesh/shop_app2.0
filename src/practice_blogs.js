@@ -80,23 +80,54 @@ const Button = styled.button`
     background-color: rgb(30, 220, 109);
   }
 `;
-const BlogList = ({ blogs, changeblog, maindata }) => {
+const BlogList = ({
+  blogs,
+  changeblog,
+  maindata,
+  cart,
+  addCart,
+  count,
+  addcount,
+}) => {
   const [search, addSearch] = useState("");
+  const [Cart, addtoCart] = useState([]);
   const [inp, setInp] = useState("");
   const [nresult, setnresult] = useState(false);
 
   const PostVal = (ind) => {
-    axios
-      .post("https://fakestoreapi.com/products/", blogs[ind])
-      .then((ele) => {
-        if (ele.status === 200) {
-          console.log(blogs[ind]);
-          alert("Success : 200");
-        }
-      })
-      .catch((err) => {
-        alert("Error");
-      });
+    // axios
+    //   .post("https://fakestoreapi.com/products/", blogs[ind])
+    //   .then((ele) => {
+    //     if (ele.status === 200) {
+    //       console.log(blogs[ind]);
+    //       alert("Success : 200");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     alert("Error");
+    //   });
+  };
+
+  const AddCart = (index) => {
+    console.log(cart);
+    let cartData = [...cart, maindata[index]];
+    // axios
+    //   .post(" http://localhost:9000/data", maindata[index])
+    //   .then((ele) => {
+    //     if (ele.status === 200) {
+    //       console.log(ele);
+    //       alert("Success : 200");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     alert("Error");
+    //   });
+    let countIncrement = count + 1;
+    addcount(countIncrement);
+    console.log(count);
+
+    addCart(cartData);
+    console.log(cartData);
   };
 
   const SearchData = () => {
@@ -189,6 +220,7 @@ const BlogList = ({ blogs, changeblog, maindata }) => {
             </h3>
             <p>Rs.{ele?.price}</p>
             {/* <Rate value={3} /> */}
+            <Button onClick={() => AddCart(index)}>Add To Cart</Button>
             <Button onClick={() => PostVal(index)}>Buy Now</Button>
           </Card>
         ))}

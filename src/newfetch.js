@@ -25,8 +25,9 @@ const Content = styled.div`
 `;
 
 const StyledForm = styled.form`
-  width: 50%;
+  width: 40%;
   display: grid;
+  background-color: whitesmoke;
 `;
 
 const HTag = styled.h1`
@@ -85,7 +86,12 @@ const SpanC = styled.span`
 
 const InputStyle = styled.input`
   border: none;
-  width: 30%;
+  width: 40%;
+  height: 40px;
+  margin: 0 auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  border-radius: 8px;
 `;
 
 const StyledInput = styled.input`
@@ -140,7 +146,7 @@ const FetchCRUD = () => {
     axios
       .delete("http://localhost:7000/data/" + val)
       .then((ele) => {
-        if (ele.status === 200) {
+        if (ele.ok) {
           alert("Deleted Successfully");
         }
         let num = loop + 1;
@@ -179,13 +185,13 @@ const FetchCRUD = () => {
       axios
         .put("http://localhost:7000/data/" + val, obj)
         .then((ele) => {
-          if (ele.status === 200) {
+          if (ele.ok) {
             alert("Value Updated Successfully");
           }
           var num = loop + 1;
           setloop(num);
         })
-        .catch((err) => alert(err));
+        .catch((err) => console.log(err));
     }
   };
 
@@ -257,9 +263,11 @@ const FetchCRUD = () => {
     console.log(ids);
     axios
       .post("http://localhost:7000/data/", obj)
-      .then((ele) => {
-        if (ele.status === 201) {
+      .then((response) => {
+        console.log(response);
+        if (response.ok) {
           alert("Success");
+          console.log(response.ok);
           setInp("");
           setMail("");
         }
@@ -270,10 +278,13 @@ const FetchCRUD = () => {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:7000/data").then((ele) => {
-      Setmaindb(ele.data);
-      setdata(ele.data);
-    });
+    axios
+      .get("http://localhost:7000/data")
+      .then((ele) => {
+        Setmaindb(ele.data);
+        setdata(ele.data);
+      })
+      .catch((error) => console.log(error));
   }, [loop]);
 
   return (

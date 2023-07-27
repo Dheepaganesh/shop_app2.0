@@ -3,53 +3,58 @@ import AboutPage from "./pages/about";
 import Contact from "./pages/contact";
 import Practice from "./practice";
 import FetchCRUD from "./newfetch";
+import Cart from "./pages/cart";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { styled } from "styled-components";
+import { useState } from "react";
 
-const Navbar = () => {
-  const Head = styled.div`
-    grid-area: head;
-    display: flex;
-    flex-direction: columns;
-    justify-content: space-between;
-  `;
+const Head = styled.div`
+  grid-area: head;
+  display: flex;
+  flex-direction: columns;
+  justify-content: space-between;
+`;
 
-  const SearchInput = styled.input`
-    width: 400px;
-    height: 35px;
-    border-radius: 16px 0px 0px 16px;
-    border: none;
-    margin-top: 2%;
-    outline: none;
+const SearchInput = styled.input`
+  width: 400px;
+  height: 35px;
+  border-radius: 16px 0px 0px 16px;
+  border: none;
+  margin-top: 2%;
+  outline: none;
 
-    ::placeholder {
-      padding-left: 65px;
-      backgound-color: black;
-      color: lightgray;
-    }
-  `;
+  ::placeholder {
+    padding-left: 65px;
+    backgound-color: black;
+    color: lightgray;
+  }
+`;
 
-  const SearchButton = styled.button`
-    width: 80px;
-    height: 35px;
-    border-radius: 0px 10px 10px 0px;
-    border: none;
-    margin-top: 2%;
-  `;
+const SearchButton = styled.button`
+  width: 80px;
+  height: 35px;
+  border-radius: 0px 10px 10px 0px;
+  border: none;
+  margin-top: 2%;
+`;
 
-  const BarsMenu = styled.div`
-    display: flex;
-    flex-direction: rows;
-  `;
+const BarsMenu = styled.div`
+  display: flex;
+  flex-direction: rows;
+`;
 
-  const Bars = styled(Link)`
-    margin: 10px;
-    color: black;
+const Bars = styled(Link)`
+  margin: 10px;
+  color: black;
+  text-decoration: none;
+`;
 
-    &:hover {
-      text-decorators: underline;
-    }
-  `;
+const SpanColor = styled.span`
+  color: red;
+`;
+
+const Navbar = ({ count }) => {
+  const condition = count > 0;
   return (
     // <div>
     //   <Link to="/home">Home</Link>
@@ -70,6 +75,9 @@ const Navbar = () => {
           <Bars to="/home">Home</Bars>
           <Bars to="/shopping">Shopping</Bars>
           <Bars to="/customers">Customers</Bars>
+          <Bars to="/mycart">
+            Cart {count > 0 ? <SpanColor>{count}</SpanColor> : null}
+          </Bars>
         </BarsMenu>
       </Head>
     </div>
