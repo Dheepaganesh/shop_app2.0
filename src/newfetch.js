@@ -122,9 +122,17 @@ const FetchCRUD = () => {
     }
   };
 
-  // const NameInput = () => (
-
-  // );
+  const NameInput = () => (
+    <InputStyle
+      type="text"
+      value={inp}
+      placeholder="Enter Name"
+      minLength={4}
+      pattern="[A-Za-z]+"
+      maxLength={15}
+      onChange={(e) => PostValue(e.target.value)}
+    ></InputStyle>
+  );
 
   const DeleteVal = (ind) => {
     const val = data[ind]?.id;
@@ -312,15 +320,7 @@ const FetchCRUD = () => {
             required
           /> */}
           <StyledForm onSubmit={(e) => PostElement(e)}>
-            <InputStyle
-              type="text"
-              value={inp}
-              placeholder="Enter Name"
-              minLength={4}
-              pattern="[A-Za-z]+"
-              maxLength={15}
-              onChange={(e) => PostValue(e.target.value)}
-            ></InputStyle>
+            {NameInput()}
             <InputStyle
               type="email"
               value={mail}
