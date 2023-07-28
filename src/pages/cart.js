@@ -123,6 +123,7 @@ const Cart = ({ data, setCart, count, addcount }) => {
     console.log(cartList[0]?.item);
     const newList = cartList?.filter((item, i) => cartList[i]?.item?.id !== id);
     let newData = data?.filter((element, i) => element?.id !== id);
+    setCart(newData);
     console.log(newData);
     //filter((element, i) => i !== index
     setcartList(newList);
