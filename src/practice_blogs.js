@@ -109,7 +109,7 @@ const BlogList = ({
   };
 
   const AddCart = (index) => {
-    console.log(cart);
+    alert("Item added Successfully");
     let cartData = [...cart, maindata[index]];
     // axios
     //   .post(" http://localhost:9000/data", maindata[index])
@@ -131,13 +131,13 @@ const BlogList = ({
   };
 
   const SearchData = () => {
-    const reg = RegExp(inp, "i");
-    const fil = blogs.filter((ele) => reg.test(ele?.title));
-    if (fil.length === 0) {
+    const regex = RegExp(inp, "i");
+    const fill = blogs?.filter((ele) => regex.test(ele?.title));
+    if (fill.length === 0) {
       setnresult(true);
     }
-    changeblog(fil);
-    console.log(fil);
+    changeblog(fill);
+    console.log(fill);
   };
 
   const getSearch = (value) => {
@@ -198,7 +198,7 @@ const BlogList = ({
           type="text"
           placeholder="Search Products"
           value={inp}
-          onChange={(e) => getSearch(e.target.value)}
+          onChange={(e) => getSearch(e?.target?.value)}
         ></SearchInput>
         <SearchButton onClick={SearchData}>Search</SearchButton>
       </div>

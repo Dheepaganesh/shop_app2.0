@@ -2,6 +2,7 @@
 import styled from "styled-components";
 // import axios from "axios";
 import { AiTwotoneDelete, AiOutlineShoppingCart } from "react-icons/ai";
+import { useEffect, useState } from "react";
 
 const Table = styled.table`
   width: 80%;
@@ -90,20 +91,47 @@ const NoResult = styled.h1`
 // const DeleteIcon
 
 const Cart = ({ data, setCart, count, addcount }) => {
-  //   const [cartData, setCartData] = useState([]);
-  //   const [mainData, setMainData] = useState([]);
-  //   const [total, addtotal] = useState(0);
+  const [cartList, setcartList] = useState([]);
 
-  const DelteItem = (index) => {
-    let newData = data.filter((element, i) => i !== index);
+  function removeDuplicatesAndCount(data) {
+    const countMap = {};
+    data.forEach((item) => {
+      const key = JSON.stringify(item);
+      countMap[key] = (countMap[key] || 0) + 1;
+    });
+
+    return Object.entries(countMap).map(([key, value]) => ({
+      item: JSON.parse(key),
+      count: value,
+    }));
+  }
+
+  const countedData = removeDuplicatesAndCount(data);
+
+  useEffect(() => {
+    setcartList(countedData);
+  }, []);
+
+  const DeleteItem = (index) => {
+    let newData = data?.filter((element, i) => i !== index);
     setCart(newData);
     let countDecrement = count - 1;
     addcount(countDecrement);
   };
 
+  const DeleteItem1 = (id) => {
+    console.log(cartList[0]?.item);
+    const newList = cartList?.filter((item, i) => cartList[i]?.item?.id !== id);
+    let newData = data?.filter((element, i) => element?.id !== id);
+    console.log(newData);
+    //filter((element, i) => i !== index
+    setcartList(newList);
+    addcount(newData?.length);
+  };
+
   return (
     <div>
-      {data.length === 0 ? (
+      {cartList?.length === 0 ? (
         <NoResultContainer>
           <div>
             <AiOutlineShoppingCart />
@@ -112,49 +140,52 @@ const Cart = ({ data, setCart, count, addcount }) => {
         </NoResultContainer>
       ) : null}
       <Table>
-        {data.length > 0 ? (
+        {cartList?.length > 0 ? (
           <HeadRow>
-            <HeadColumn colSpan={4}>
+            <HeadColumn colSpan={5}>
               <Head>Cart</Head>
             </HeadColumn>
           </HeadRow>
         ) : null}
+        {cartList?.map(({ item, count, index }) => (
+          <Row>
+            <Column>
+              <Image
+                src={item?.image}
+                alt="img"
+                width={140}
+                height={140}
+              ></Image>
+            </Column>
+            <Column>
+              <h5>Title : {item?.title}</h5>
+              <p>Category : {item?.category}</p>
+            </Column>
+            <Column>
+              <h3>Rs.{item?.price}</h3>
+            </Column>
+            <Column>
+              <h4>{count}</h4>
+            </Column>
+            <Column>
+              <IconContainer>
+                <AiTwotoneDelete onClick={() => DeleteItem1(item?.id)} />
+              </IconContainer>
+            </Column>
+          </Row>
+        ))}
 
-        {data.map((element, index) => {
-          return (
-            <Row>
-              <Column>
-                <Image
-                  src={element?.image}
-                  alt="img"
-                  width={140}
-                  height={140}
-                ></Image>
-              </Column>
-              <Column>
-                <h5>Title : {element?.title}</h5>
-                <p>Category : {element?.category}</p>
-              </Column>
-              <Column>
-                <h3>Rs.{element?.price}</h3>
-              </Column>
-              <Column>
-                <IconContainer>
-                  <AiTwotoneDelete onClick={() => DelteItem(index)} />
-                </IconContainer>
-              </Column>
-            </Row>
-          );
-        })}
-        {data.length > 0 ? (
+        {cartList?.length > 0 ? (
           <Row1>
-            <Column1 colSpan={2}>
+            <Column1 colSpan={3}>
               <h1>Total Price:</h1>
             </Column1>
             <Column1 colSpan={2}>
               <h3>
                 Rs.
-                {parseInt(data.reduce((total, item) => total + item?.price, 0))}
+                {parseInt(
+                  data?.reduce((total, item) => total + item?.price, 0)
+                )}
               </h3>
             </Column1>
           </Row1>
@@ -165,3 +196,32 @@ const Cart = ({ data, setCart, count, addcount }) => {
 };
 
 export default Cart;
+
+//
+
+// {data?.map((element, index) => {
+//     return (
+//       <Row>
+//         <Column>
+//           <Image
+//             src={element?.image}
+//             alt="img"
+//             width={140}
+//             height={140}
+//           ></Image>
+//         </Column>
+//         <Column>
+//           <h5>Title : {element?.title}</h5>
+//           <p>Category : {element?.category}</p>
+//         </Column>
+//         <Column>
+//           <h3>Rs.{element?.price}</h3>
+//         </Column>
+//         <Column>
+//           <IconContainer>
+//             <AiTwotoneDelete onClick={() => DeleteItem(index)} />
+//           </IconContainer>
+//         </Column>
+//       </Row>
+//     );
+//   })}
