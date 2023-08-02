@@ -26,6 +26,8 @@ const initialState = {
   no_of_ice: 20,
 };
 
+console.log("Deepak");
+
 const reduce = (state = initialState, action) => {
   switch (action.type) {
     case BuyCake:
@@ -58,3 +60,38 @@ store?.dispatch(buyCake());
 store?.dispatch(buyCake());
 store?.dispatch(buyIce());
 unsubscribe();
+
+//Example
+
+const SalaryIncrement = () => {
+  return {
+    type: "Increment",
+    info: "Salary Increment",
+  };
+};
+
+const Salarydecrement = () => {
+  return {
+    type: "Decrement",
+    info: "Salary Decrement",
+  };
+};
+
+const counter = (state = 10000, action) => {
+  switch (action.type) {
+    case "Increment":
+      return state + 5000;
+    case "Decrement":
+      return state - 5000;
+    default:
+      return state;
+  }
+};
+
+const st = createStore(counter);
+
+st?.subscribe(() => console.log(st.getState()));
+
+// st?.dispatch(SalaryIncrement());
+
+st?.dispatch(Salarydecrement());
