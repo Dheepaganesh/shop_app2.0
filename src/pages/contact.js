@@ -1,4 +1,5 @@
 const Contact = () => {
+  console.log();
   return <h1>Contacts</h1>;
 };
 
